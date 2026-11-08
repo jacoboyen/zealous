@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zealous Racing · Race manager</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&amp;display=swap">
+<style>
+:root{color-scheme:light;--bg:#fff;--card:#fff;--tx:#10193a;--mu:#5d6679;--bd:#e0e3ea;--ac:#e0202a;--navy:#0f1f5c;--teal:#0b6a9e;--er:#a32d2d;--erb:#fcebeb;--ok:#2f6b1c;--okb:#e8f3de;--wa:#7a4a08;--wab:#fff1c9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 "Barlow",system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:980px;margin:0 auto;padding:0 20px}
+header{background:var(--navy);color:#fff;border-top:5px solid var(--teal);border-bottom:5px solid var(--ac);padding:26px 0 20px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.logo{font:300 32px/1 "Barlow","Arial Narrow",sans-serif;letter-spacing:1px}.logo b{font-weight:700}
+.bar{height:20px;width:280px;max-width:100%;background:var(--ac);margin-top:10px}
+.co{font:700 12px "Barlow",sans-serif;letter-spacing:2.5px}
+nav{display:flex;gap:2px;flex-wrap:wrap;background:var(--teal);padding:4px}
+.t{background:none;border:0;color:#fff;padding:5px 12px;font:inherit;font-weight:500;border-radius:4px;cursor:pointer}
+.t.on{background:rgba(255,255,255,.2);font-weight:700}
+main{max-width:980px;margin:0 auto;padding:26px 20px 60px}
+.eyebrow{font:600 11px "Barlow",sans-serif;letter-spacing:2px;color:var(--teal);text-transform:uppercase}
+h2.pt{margin:0 0 14px;font:300 30px/1.1 "Barlow","Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.5px}h2.pt b{font-weight:800}
+h3{margin:0 0 4px;font:700 17px/1.2 "Barlow","Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.3px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;margin-bottom:14px;box-shadow:0 1px 4px rgba(15,31,92,.1)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+button,select,input{font:inherit;color:var(--tx);background:#fff;border:1px solid var(--bd);border-radius:6px;padding:6px 10px;min-height:32px}
+button{cursor:pointer;font-weight:600;color:var(--teal)}button:hover{border-color:var(--navy)}
+button:focus-visible,select:focus-visible,input:focus-visible,.t:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+button.p{background:var(--ac);color:#fff;border-color:var(--ac)}button.p:hover{background:#c41a24}
+input.n{width:80px}
+table{width:100%;border-collapse:collapse}th{text-align:left;font-weight:600;color:var(--mu);font-size:12px;padding:4px 8px}td{padding:6px 8px;border-top:1px solid var(--bd)}
+td input{min-height:28px;padding:3px 8px}
+.bib{display:inline-block;min-width:46px;text-align:center;font:800 15px "Barlow","Arial Narrow",sans-serif;border:2px solid var(--navy);border-radius:3px;padding:0 8px;background:#fff;color:var(--navy)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:14px;align-items:start}
+.msg{padding:8px 12px;border-radius:6px;margin-bottom:14px;border:1px solid}.msg.er{background:var(--erb);color:var(--er);border-color:var(--er)}.msg.ok{background:var(--okb);color:var(--ok);border-color:var(--ok)}
+.pill{display:flex;justify-content:space-between;background:var(--wab);color:var(--wa);border-radius:6px;padding:5px 9px;margin-top:6px}
+.tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:1px 8px;border-radius:10px;background:#eef0f5;color:var(--navy)}.tag.d{background:var(--ac);color:#fff}
+.mu{color:var(--mu)}.gh td{background:#f1f3f8;font-weight:700;font-size:12px;color:var(--navy)}
+.ends{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;max-width:300px;margin-top:6px}.ends i{font:11px system-ui;text-align:center;padding:3px 0;border:1px solid var(--bd);border-radius:3px;font-style:normal;color:var(--mu)}.ends i.u{background:var(--navy);color:#fff;border-color:var(--navy)}
+.x{border:0;background:none;color:var(--mu);min-height:0;padding:0 6px}
+footer{background:var(--navy);color:#fff;border-top:5px solid var(--ac);text-align:center;padding:14px 20px;font-size:13px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+@media print{header,footer,.noprint,#m,.kio{display:none!important}body{background:#fff;color:#000}.card{border:0;box-shadow:none;padding:0;break-inside:avoid}.bib{border-color:#000;color:#000}}
+.kio{position:fixed;inset:0;z-index:99;background:var(--navy);color:#fff;display:flex;flex-direction:column;padding:2.5vh 3vw;overflow:hidden}.kio[hidden]{display:none}
+.kh{display:flex;justify-content:space-between;align-items:baseline;gap:2vw;border-bottom:.8vh solid var(--ac);padding-bottom:1.5vh}.kh h1{margin:0;font:300 5vh/1.1 "Barlow","Arial Narrow",sans-serif;text-transform:uppercase}.kh h1 b{font-weight:800}
+.kb{flex:1;display:grid;grid-template-columns:3fr 2fr;gap:3vw;min-height:0;margin-top:2.5vh}.kl{overflow:hidden}
+.kr{display:flex;align-items:baseline;gap:.6em;padding:.25em 0;border-bottom:1px solid rgba(255,255,255,.18)}.kr b{width:2em;font-weight:800}.kr span{flex:1;font-weight:600}.kr em{font-style:normal;opacity:.7;font-size:.75em}
+.pod{display:flex;align-items:flex-end;gap:1.2vw}.pc{flex:1;border-radius:1vh 1vh 0 0;padding:2vh .8vw;text-align:center;color:#111;display:flex;flex-direction:column;gap:.6vh;overflow:hidden}.pc b{font:800 10vh/1 "Barlow",sans-serif}.pc span{font:700 3.4vh/1.15 "Barlow",sans-serif}.pc small{font-size:2.4vh}
+.kx{position:absolute;right:2vw;bottom:1vh;background:none;border:0;color:#fff;opacity:.5;font-size:14px}
+.mdl{position:fixed;inset:0;z-index:50;background:rgba(15,31,92,.6);display:flex;align-items:center;justify-content:center}.mdl>div{background:#fff;border-radius:8px;padding:18px;max-width:440px;width:92%}
+</style></head><body>
+<header class="noprint"><div class="w"><div class="top"><div><div class="logo"><b>ZEALOUS</b>RACING</div><div class="bar"></div></div><div class="co">ZEALOUS × IOWA BIKE CO</div></div><nav id="nav"></nav></div></header>
+<main><div id="m"></div><div id="v"></div></main>
+<div id="k" class="kio" hidden></div>
+<footer class="noprint">Zealous Racing × Iowa Bike Co, Pella IA · Race manager UI prototype. Data lives in memory only.</footer>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S={tab:'Riders',riders:[],slots:[],slot:null,cat:null,msg:null,id:1};
+const TABS=['Riders','Schedule','Bibs','Results','Start sheets','Kiosk'];
+const cats=()=>[...new Set(S.riders.map(r=>r.cat))].sort(),sched=()=>S.slots.flatMap(s=>s.cats),unsched=()=>cats().filter(c=>!sched().includes(c));
+const inSlot=s=>S.riders.filter(r=>s.cats.includes(r.cat)),em=n=>n%100,pad=n=>String(n).padStart(2,'0');
+const fmt=t=>{const[h,m]=t.split(':');return((h%12)||12)+':'+m+(h<12?' AM':' PM')};
+const sl=()=>S.slots.find(s=>s.id==S.slot)||S.slots[0],R=id=>S.riders.find(r=>r.id==id);
+const grp=r=>r.dayof?3:r.pts>0?1:2;
+const ord=c=>S.riders.filter(r=>r.cat==c).sort((a,b)=>grp(a)-grp(b)||(grp(a)==1?b.pts-a.pts:0)||a.reg.localeCompare(b.reg));
+const msg=(t,m)=>{S.msg={t,m};draw()};
+const go=t=>{S.tab=t;draw()};
+const TM=['Zealous Racing','Iowa Bike Co','Prairie Velo','Cedar Cycling','Independent'],pk=r=>r.name.toLowerCase(),CX=()=>S.type=='Cyclocross',uniq=a=>new Set(a.map(pk)).size;
+const scope=r=>CX()?S.riders:inSlot(S.slots.find(s=>s.cats.includes(r.cat))||{cats:[]});
+const clash=(r,n)=>scope(r).find(x=>x.bib!=null&&pk(x)!=pk(r)&&(CX()?em(x.bib)==em(n):x.bib==n));
+const rk=r=>typeof r.place=='number'?r.place:r.place=='DNF'?1e4:r.place=='DQ'?1e5:1e6;
+function csv(t){const rows=[];let r=[],f='',q=0;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=0}else f+=c}else if(c=='"')q=1;else if(c==','){r.push(f);f=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;r.push(f);f='';if(r.some(x=>x.trim()))rows.push(r);r=[]}else f+=c}r.push(f);if(r.some(x=>x.trim()))rows.push(r);return rows}
+function load(el){const f=el.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{S.pend=rd.result;draw()};rd.readAsText(f)}
+function imp(t){S.type=t;const rows=csv(S.pend),h=rows.shift().map(x=>x.trim().toLowerCase());S.pend=null;
+const ix=(...k)=>h.findIndex(x=>k.some(y=>x.includes(y)));const fn=ix('first'),ln=ix('last'),nm=h.indexOf('name'),ct=ix('category','race','event'),pt=ix('point','rank'),rg=ix('registration date','registered','date'),tm=ix('team','club');let n=0;
+rows.forEach((r,i)=>{const name=fn>=0?(r[fn]+' '+(ln>=0?r[ln]:'')).trim():(nm>=0?r[nm]:'');if(!name||ct<0||!r[ct])return;S.riders.push({id:S.id++,name,cat:r[ct].trim(),team:tm>=0&&r[tm]?r[tm].trim():'Independent',pts:+(pt>=0&&r[pt])||0,reg:rg>=0&&r[rg]?r[rg]:String(10000+i),dayof:0,bib:null,place:''});n++});
+msg(n?'ok':'er',n?n+' entries imported as a '+t+' event ('+uniq(S.riders)+' unique riders).':'No riders found. The file needs a name (or first and last name) column and a category column.')}
+function sample(){S.riders=[];S.slots=[];S.id=1;S.type='Cyclocross';`Alex Moreno|Men Cat 4|412|2026-10-20
+Sam Whitaker|Men Cat 4|388|2026-10-21
+Jordan Lee|Men Cat 4|355|2026-10-22
+Chris Patel|Men Cat 4|310|2026-10-25
+Evan Ross|Men Cat 4|0|2026-10-28
+Luca Bianchi|Men Cat 4|0|2026-11-02
+Noah Berg|Men Cat 4|0|~08:42|1
+Omar Haddad|Men Cat 4|0|~08:55|1
+Dana Brooks|Women Cat 3|298|2026-10-19
+Riley Nguyen|Women Cat 3|271|2026-10-23
+Mia Fischer|Women Cat 3|240|2026-10-24
+Taylor Kim|Women Cat 3|0|2026-11-01
+Pat Dunn|Men Cat 5|0|2026-10-30
+Lee Ortiz|Men Cat 5|120|2026-10-26
+Sky Allen|Men Cat 5|95|2026-11-03
+Jo Park|Masters 40+|205|2026-10-18
+Ken Alvarez|Masters 40+|180|2026-10-29
+Rhea Cole|Masters 40+|0|2026-11-04
+Tom Hale|Men Cat 3|330|2026-10-21
+Ian Frost|Men Cat 3|290|2026-10-27
+Chris Patel|Men Cat 3|260|2026-10-25`.split('\n').forEach(l=>{const p=l.split('|');S.riders.push({id:S.id++,name:p[0],cat:p[1],pts:+p[2],reg:p[3],dayof:p[4]?1:0,team:TM[S.id%5],bib:null,place:''})});
+S.slots=[{id:S.id++,time:'08:00',cats:['Men Cat 5']},{id:S.id++,time:'09:15',cats:['Men Cat 4','Women Cat 3']}];S.slots.push({id:S.id++,time:'10:30',cats:['Men Cat 3']});S.slot=S.slots[1].id;msg('ok','Sample cyclocross data loaded: 21 entries, 20 unique riders (Chris Patel races twice), 3 time slots. Masters 40+ is still unscheduled.')}
+function sugBib(c,nm){const k=(nm||'').toLowerCase(),o=CX()&&k&&S.riders.find(x=>pk(x)==k&&x.bib!=null);if(o)return o.bib;
+if(!CX()&&!S.slots.some(s=>s.cats.includes(c)))return null;const sc=scope({name:nm||'',cat:c}).filter(r=>r.bib!=null);
+if(!CX()){const u=new Set(sc.map(r=>r.bib));let n=Math.max(-1,...sc.map(r=>r.bib))+1;if(n>200)n=0;while(u.has(n)&&n<=200)n++;return n>200?null:n}
+const u=new Set(sc.map(r=>em(r.bib)));if(u.size>=100)return null;let n=Math.max(99,...sc.filter(r=>r.cat==c).map(r=>r.bib))+1;while(u.has(em(n)))n++;return n}
+function sg(){const c=$('#dc').value,nm=$('#dn').value.trim(),b=sugBib(c,nm),o=CX()&&nm&&S.riders.some(x=>pk(x)==nm.toLowerCase()&&x.bib!=null);$('#db').value=b??'';
+$('#dh').textContent=b==null?'No bib can be recommended: the category isn\'t scheduled or no bib endings are free.':o?nm+' already has bib '+b+' from another race today, so it is reused.':'Recommended bib '+b+': '+(CX()?'the next number after the current '+c+' bibs whose last two digits are free anywhere today.':'the next free number from 0 to 200 in that time slot.')+' You can change it.'}
+function dayof(){const n=$('#dn').value.trim(),c=$('#dc').value,b=$('#db').value.trim(),t=$('#dt').value.trim()||'Independent';if(!n)return msg('er','Enter the rider name.');const id=S.id++;S.riders.push({id,name:n,cat:c,team:t,pts:0,reg:'~'+new Date().toISOString(),dayof:1,bib:null,place:''});
+if(b){setBib(id,b);if(R(id).bib!=null){S.msg={t:'ok',m:n+' added as a day-of rider with bib '+R(id).bib+'. They start after all pre-registered riders.'};draw()}else{S.msg={t:'er',m:n+' was added without a bib. '+$('#m').textContent};draw()}return}
+msg('ok',n+' added as a day-of registration with no bib. They start after all pre-registered riders.')}
+function addSlot(){const t=$('#ts').value;if(!t)return msg('er','Pick a start time.');if(S.slots.some(s=>s.time==t))return msg('er','A slot at '+fmt(t)+' already exists.');const s={id:S.id++,time:t,cats:[]};S.slots.push(s);S.slots.sort((a,b)=>a.time.localeCompare(b.time));S.slot=s.id;msg('ok','Slot added at '+fmt(t)+'.')}
+function addRace(sid){const s=S.slots.find(x=>x.id==sid),c=$('#c'+sid).value;if(!c)return msg('er','No unscheduled categories left.');
+const e=new Set(inSlot(s).filter(r=>r.bib!=null).map(r=>r.bib)),add=S.riders.filter(r=>r.cat==c);
+const bad=CX()?null:add.find(r=>r.bib!=null&&e.has(r.bib));if(bad)return msg('er','Can\'t add '+c+': bib '+bad.bib+' ('+bad.name+') is already used in this slot. Clear that bib first.');
+if((CX()?uniq(S.riders)>100:inSlot(s).length+add.length>201))return msg('er','Too many riders: cyclocross allows 100 unique riders per day, and a gravel slot allows 201 (bibs 0 to 200).');s.cats.push(c);msg('ok',c+' added to '+fmt(s.time)+'.')}
+function rmRace(sid,i){S.slots.find(x=>x.id==sid).cats.splice(i,1);draw()}
+function rmSlot(sid){const s=S.slots.find(x=>x.id==sid);if(s.cats.length&&!confirm('Remove the '+fmt(s.time)+' slot? Its '+s.cats.length+' race(s) will become unassigned.'))return;S.slots=S.slots.filter(x=>x.id!=sid);S.slot=null;msg('ok','Removed the '+fmt(s.time)+' slot.'+(s.cats.length?' '+s.cats.join(', ')+' '+(s.cats.length>1?'are':'is')+' now unassigned.':''))}
+function setBib(id,v){const r=R(id),all=S.riders.filter(x=>pk(x)==pk(r));v=v.trim();if(!v){all.forEach(x=>x.bib=null);return draw()}
+if(!/^\d{1,4}$/.test(v))return msg('er','Bib must be 1 to 4 digits.');if(!CX()&&+v>200)return msg('er','Gravel bibs go from 0 to 200.');
+if(!CX()&&!S.slots.some(s=>s.cats.includes(r.cat)))return msg('er',r.cat+' isn\'t on the schedule yet. Add it to a time slot first.');
+const o=clash(r,+v);
+if(o)return msg('er',CX()?'Bib '+(+v)+' is blocked. Last two digits '+pad(em(+v))+' are already used by bib '+o.bib+' ('+o.name+') elsewhere today.':'Bib '+(+v)+' is already used by '+o.name+' in this slot.');
+all.forEach(x=>x.bib=+v);msg('ok','Bib '+(+v)+' assigned to '+r.name+(all.length>1?' for all '+all.length+' of their races.':'.'))}
+function auto(){const s=sl();if(!s)return;const G=!CX(),key=b=>G?b:em(b),cs=G?s.cats:S.slots.flatMap(x=>x.cats),u=new Set((G?inSlot(s):S.riders).filter(r=>r.bib!=null).map(r=>key(r.bib)));let n=G?1:100,c=0;
+cs.forEach(k=>ord(k).forEach(r=>{if(r.bib!=null)return;const o=S.riders.find(x=>pk(x)==pk(r)&&x.bib!=null);if(o){r.bib=o.bib;return}if(!G&&u.size>=100)return;while(u.has(key(n)))n++;if(G&&n>200)return;S.riders.filter(x=>pk(x)==pk(r)).forEach(x=>x.bib=n);u.add(key(n));c++}));
+msg('ok',c+' bibs assigned in call-up order.'+(G?' Gravel bibs run 0 to 200.':' Riders in several races keep one bib all day.'))}
+function clearBibs(){const s=sl();inSlot(s).forEach(r=>S.riders.filter(x=>pk(x)==pk(r)).forEach(x=>x.bib=null));msg('ok','Bibs cleared for '+fmt(s.time)+(CX()?' riders (their other races too).':'.'))}
+function kkey(e){const k=e.key,c=e.code;let st=0;if(k=='Enter'||c=='NumpadEnter')st=1;else if(k=='+'||c=='NumpadAdd'||/^d$/i.test(k))st='DNF';else if(k=='-'||c=='NumpadSubtract'||/^q$/i.test(k))st='DQ';if(!st)return;e.preventDefault();const v=e.target.value.replace(/\D/g,'');if(v)rec(+v,st==1?null:st)}
+function kbtn(st){const v=$('#kin').value.replace(/\D/g,'');if(v)rec(+v,st)}
+function rec(n,st){const all=inSlot(sl()).filter(x=>x.bib!=null&&em(x.bib)==n),c=all.filter(x=>x.place==='').sort((a,b)=>a.bib-b.bib);
+if(!all.length)return msg('er','No rider with a bib ending in '+pad(n)+' in this time slot.');if(!c.length)return msg('er','Every rider with a bib ending in '+pad(n)+' already has a result.');
+if(c.length>1){S.pick={ids:c.map(x=>x.id),st};return draw()}fin(c[0].id,st)}
+function fin(id,st){const r=R(id);S.pick=null;r.place=st||Math.max(0,...S.riders.filter(x=>x.cat==r.cat&&typeof x.place=='number').map(x=>x.place))+1;(S.hist=S.hist||[]).push(r.id);
+msg('ok','Bib '+r.bib+', '+r.name+' ('+r.cat+'): '+(st||'place '+r.place))}
+function undo(){const id=(S.hist||[]).pop();if(id){R(id).place='';draw()}}
+function done(){const a=inSlot(sl()).filter(r=>r.place==='');a.forEach(r=>r.place='DNF');msg('ok',a.length+' riders without a result were marked DNF.')}
+const KX='<button class="kx" onclick="kexit()">Exit kiosk (Esc)</button>';
+function kiosk(){S.sec=Math.max(3,+$('#ks').value||10);S.ki=0;kon();if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{})}
+function kon(){clearInterval(S.kt);$('#k').hidden=false;kdraw();S.kt=setInterval(()=>{S.ki++;kdraw()},S.sec*1000)}
+function kexit(){clearInterval(S.kt);$('#k').hidden=true;if(document.fullscreenElement)document.exitFullscreen()}
+function kdraw(){const l=S.slots.flatMap(s=>s.cats.map(c=>[s,c])).filter(([s,c])=>S.riders.some(r=>r.cat==c&&r.place!=='')),k=$('#k'),hd=t=>`<div class="kh"><h1><b>ZEALOUS</b>RACING</h1><h1>${t}</h1></div>`;
+if(!l.length){k.innerHTML=hd('Waiting for results')+KX;return}
+const[s,c]=l[S.ki%l.length],rs=S.riders.filter(r=>r.cat==c&&r.place!=='').sort((a,b)=>rk(a)-rk(b)),f=rs.filter(r=>typeof r.place=='number'),P=['#f2b705','#c9ced6','#cd7f32'];
+const pc=i=>f[i]?`<div class="pc" style="background:${P[i]};height:${[80,62,48][i]}%"><b>${i+1}</b><span>${esc(f[i].name)}</span><small>${esc(f[i].team||'')}</small></div>`:'';
+k.innerHTML=hd(esc(c)+' · '+fmt(s.time))+`<div class="kb"><div class="kl" style="font-size:${Math.min(4.2,38/Math.max(rs.length,1)).toFixed(2)}vh">${rs.map(r=>`<div class="kr"><b>${r.place}</b><span>${esc(r.name)}</span><em>${esc(r.team||'')}</em></div>`).join('')}</div><div class="pod">${pc(1)}${pc(0)}${pc(2)}</div></div>`+KX}
+function setPlace(id,v){R(id).place=v.trim();draw()}
+const slotSel=()=>S.slots.length?`<select onchange="S.slot=this.value;draw()">${S.slots.map(s=>`<option value="${s.id}" ${s==sl()?'selected':''}>${fmt(s.time)}: ${esc(s.cats.join(', ')||'no races')}</option>`).join('')}</select>`:'';
+const empty=m=>`<div class="card"><b>${m}</b><div class="mu">Load sample data or import a BikeReg CSV on the Riders tab, then build the schedule.</div></div>`;
+const V={
+Riders(){const cs=cats();return `${S.pend?`<div class="card" style="border-color:var(--ac)"><h3>What type of event is this?</h3><div class="row"><button class="p" onclick="imp('Gravel')">Gravel</button><button class="p" onclick="imp('Cyclocross')">Cyclocross</button><button onclick="S.pend=null;draw()">Cancel import</button></div><div class="mu" style="margin-top:6px">Cyclocross riders can enter several races and keep one bib all day. Gravel bibs only need unique endings within a time slot.</div></div>`:''}${S.type?`<div class="mu noprint" style="margin-bottom:10px">Event type: <b>${S.type}</b> · ${S.riders.length} entries · ${uniq(S.riders)} unique riders${CX()?' (limit 100 per day)':''}</div>`:''}<div class="card noprint"><h3>Import registrations</h3><div class="mu">BikeReg CSV with a name (or first and last name) column and a category column. An optional points column fills CrossResults points.</div><div class="row"><input type="file" accept=".csv" onchange="load(this)"><button class="p" onclick="sample()">Load sample data</button><button onclick="S.riders=[];S.slots=[];S.slot=null;S.type=null;draw()">Clear all</button></div></div>
+${cs.length?`<div class="card noprint"><h3>Add day-of registration</h3><div class="row"><input id="dn" placeholder="Rider name" oninput="sg()"><input id="dt" placeholder="Team (optional)"><select id="dc" onchange="sg()">${cs.map(c=>`<option>${esc(c)}</option>`).join('')}</select><input id="db" class="n" placeholder="Bib" aria-label="Bib"><button class="p" onclick="dayof()">Add rider</button></div><div id="dh" class="mu" style="margin-top:6px"></div></div>`:''}
+<div class="card">${S.riders.length?`<table><tr><th>Rider</th><th>Category</th><th>Team</th><th>CX points</th><th>Registration</th><th>Bib</th><th></th></tr>${S.riders.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.cat)}</td><td>${esc(r.team||'')}</td><td><input class="n" value="${r.pts||''}" placeholder="none" onchange="R(${r.id}).pts=+this.value||0;draw()"></td><td><span class="tag ${r.dayof?'d':''}">${r.dayof?'day-of':'pre-registered'}</span></td><td>${r.bib!=null?`<span class="bib">${r.bib}</span>`:'<span class="mu">none</span>'}</td><td><button class="x" aria-label="Remove ${esc(r.name)}" onclick="S.riders=S.riders.filter(x=>x.id!=${r.id});draw()">✕</button></td></tr>`).join('')}</table>`:'<b>No riders yet</b><div class="mu">Import a CSV or load the sample data to begin.</div>'}</div>`},
+Schedule(){const u=unsched();return `<div class="card noprint"><h3>Add time slot</h3><div class="row"><input type="time" id="ts" value="08:00"><button class="p" onclick="addSlot()">Add slot</button></div></div>
+<div class="grid"><div>${S.slots.map(s=>{const n=inSlot(s).length;return `<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h3>${fmt(s.time)}</h3><span class="mu">${CX()?n+' entries · '+uniq(S.riders)+' unique riders today, of 100':n+' riders of 201 bibs (0 to 200)'}</span></div>
+${s.cats.map((c,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bd);padding:4px 0"><span>${esc(c)} <span class="mu">${S.riders.filter(r=>r.cat==c).length} riders</span></span><button class="x" aria-label="Remove ${esc(c)}" onclick="rmRace(${s.id},${i})">✕</button></div>`).join('')||'<div class="mu">No races in this slot yet.</div>'}
+<div class="row">${u.length?`<select id="c${s.id}">${u.map(c=>`<option>${esc(c)}</option>`).join('')}</select><button onclick="addRace(${s.id})">Add race</button>`:'<span class="mu">All categories scheduled.</span>'}<button onclick="rmSlot(${s.id})">Remove slot</button></div></div>`}).join('')||empty('No time slots yet')}</div>
+<div class="card"><h3>Unscheduled</h3>${u.map(c=>`<div class="pill"><span>${esc(c)}</span><span>${S.riders.filter(r=>r.cat==c).length}</span></div>`).join('')||'<div class="mu">Every category has a slot.</div>'}</div></div>`},
+Bibs(){const s=sl();if(!s)return empty('Build the schedule first');const rs=inSlot(s),u=new Set((CX()?S.riders:rs).filter(r=>r.bib!=null).map(r=>em(r.bib)));
+return `<div class="card noprint"><div class="row" style="margin:0">${slotSel()}<button class="p" onclick="auto()">Auto-assign bibs</button><button onclick="clearBibs()">Clear slot bibs</button></div><div class="mu" style="margin-top:6px">${CX()?'Cyclocross: each rider keeps one bib for every race they enter, and no two riders can share last two digits anywhere in the day.':'Gravel: bibs run from 0 to 200 and each number is used once per time slot. Results entry asks you to pick the rider when bibs share the last two digits.'}</div></div>
+<div class="grid"><div class="card">${rs.length?`<table><tr><th>Category</th><th>Rider</th><th>Bib</th></tr>${s.cats.map(c=>ord(c).map(r=>`<tr><td>${esc(c)}</td><td>${esc(r.name)}</td><td><input class="n" value="${r.bib??''}" placeholder="bib" onchange="setBib(${r.id},this.value)"></td></tr>`).join('')).join('')}</table>`:'<b>No riders in this slot</b>'}</div>
+<div class="card"><h3>${CX()?'Endings in use':'Bibs in use'}</h3><div class="mu">${CX()?u.size+' of 100 taken':rs.filter(r=>r.bib!=null).length+' of 201 (0 to 200)'}</div><div class="mu" style="margin-top:4px">Filled = in use, outlined = free${CX()?'':' (lowest to highest assigned bib)'}</div><div class="ends" style="max-width:${CX()?300:380}px">${CX()?Array.from({length:100},(_,i)=>`<i class="${u.has(i)?'u':''}">${pad(i)}</i>`).join(''):(()=>{const g=rs.filter(r=>r.bib!=null).map(r=>r.bib);if(!g.length)return '<span class="mu">No bibs assigned yet.</span>';const lo=Math.min(...g),hi=Math.max(...g),a=new Set(g);return Array.from({length:hi-lo+1},(_,i)=>lo+i).map(n=>`<i class="${a.has(n)?'u':''}">${n}</i>`).join('')})()}</div></div></div>`},
+Kiosk(){const n=S.slots.flatMap(s=>s.cats).filter(c=>S.riders.some(r=>r.cat==c&&r.place!=='')).length;return `<div class="card noprint"><h3>Full screen results display</h3><div class="mu">Shows each race that has results: the full order on the left and the top 3 podium on the right. Press Esc to exit.</div><div class="row"><span>Rotate every</span><input id="ks" class="n" value="${S.sec||10}" style="width:64px" aria-label="Seconds per race"><span>seconds</span><button class="p" onclick="kiosk()">Start kiosk</button></div><div class="mu" style="margin-top:8px">${n} race${n==1?'':'s'} with results will rotate.</div></div>`},
+Results(){const s=sl();if(!s)return empty('Build the schedule first');
+return `${S.pick?`<div class="mdl" role="dialog" aria-modal="true"><div><h3>Which rider?</h3><div class="mu">More than one rider without a result has a bib ending in ${pad(em(R(S.pick.ids[0]).bib))}. Pick one, or press its number.</div>${S.pick.ids.map((id,i)=>{const r=R(id);return `<button style="display:flex;width:100%;gap:10px;margin-top:8px;align-items:center;text-align:left" onclick="fin(${id},${S.pick.st?`'${S.pick.st}'`:'null'})"><span class="bib">${r.bib}</span><span style="flex:1">${esc(r.name)} <span class="mu">${esc(r.cat)} · ${esc(r.team||'')}</span></span><span class="mu">${i+1}</span></button>`}).join('')}<button style="margin-top:12px" onclick="S.pick=null;draw()">Cancel</button></div></div>`:''}<div class="card noprint"><div class="row" style="margin:0">${slotSel()}<button onclick="undo()">Undo last</button><button onclick="done()">Done: mark the rest DNF</button><button onclick="window.print()">Print results</button></div>
+<div class="row"><input id="kin" maxlength="2" inputmode="numeric" placeholder="00" aria-label="Last two digits of bib" onkeydown="kkey(event)" oninput="this.value=this.value.replace(/\\D/g,'')" style="font-size:30px;width:110px;text-align:center;min-height:56px"><button onclick="kbtn('DNF')">DNF</button><button onclick="kbtn('DQ')">DQ</button><span class="mu">Type the last two digits, then Enter for the next finisher, + for DNF or − for DQ (or use the buttons).</span></div>
+</div>
+${s.cats.map(c=>`<div class="card"><h3>${esc(c)} <span class="mu" style="font:400 13px system-ui">${fmt(s.time)} · ${ord(c).filter(r=>r.place!=='').length} of ${ord(c).length} recorded</span></h3><table><tr><th>Place</th><th>Bib</th><th>Rider</th><th>Team</th><th class="noprint"></th></tr>${ord(c).sort((a,b)=>rk(a)-rk(b)).map(r=>`<tr><td><b>${r.place===''?'—':r.place}</b></td><td>${r.bib!=null?`<span class="bib">${r.bib}</span>`:'<span class="mu">no bib</span>'}</td><td>${esc(r.name)}</td><td class="mu">${esc(r.team||'')}</td><td class="noprint">${r.place!==''?`<button class="x" aria-label="Clear result" onclick="R(${r.id}).place='';draw()">✕</button>`:''}</td></tr>`).join('')}</table></div>`).join('')||empty('No races in this slot')}`},
+'Start sheets'(){const s=sl();if(!s)return empty('Build the schedule first');const L={1:'Pre-registered, ranked by CX points',2:'Pre-registered, unranked (by registration time)',3:'Day-of registration (by sign-up time)'};
+return `<div class="card noprint"><div class="row" style="margin:0">${slotSel()}<button class="p" onclick="window.print()">Print start sheets</button></div></div>
+${s.cats.map(c=>{const rs=ord(c);let g=0;return `<div class="card"><h3>${esc(c)} <span class="mu" style="font:400 13px system-ui">${fmt(s.time)} · ${rs.length} riders</span></h3><table><tr><th>Call-up order</th><th>Name</th><th>Team</th><th>Bib</th><th>CX points</th></tr>${rs.map((r,i)=>{let h='';if(grp(r)!=g){g=grp(r);h=`<tr class="gh"><td colspan="5">${L[g]}</td></tr>`}return h+`<tr><td>${i+1}</td><td>${esc(r.name)}</td><td class="mu">${esc(r.team||'')}</td><td>${r.bib!=null?`<span class="bib">${r.bib}</span>`:'<span class="mu">no bib</span>'}</td><td class="mu">${r.dayof?'day-of':r.pts||'unranked'}</td></tr>`}).join('')}</table></div>`}).join('')||empty('No races in this slot')}`}};
+const TT={Riders:['Rider','registrations'],Schedule:['Race','schedule'],Bibs:['Bib','assignment'],Results:['Race','results'],'Start sheets':['Start','sheets'],Kiosk:['Finish line','kiosk']};
+function draw(){const m=S.msg;S.msg=null;$('#nav').innerHTML=TABS.map(t=>`<button class="t ${t==S.tab?'on':''}" onclick="go('${t}')">${t}</button>`).join('');
+$('#m').innerHTML=m?`<div class="msg ${m.t}" role="status">${esc(m.m)}</div>`:'';const T=TT[S.tab];$('#v').innerHTML=`<div class="eyebrow noprint">Race manager${S.type?' · '+S.type:''}</div><h2 class="pt"><b>${T[0]}</b> ${T[1]}</h2>`+V[S.tab]();if(S.tab=='Riders'&&$('#dc'))sg();if(S.tab=='Results'){const b=S.pick?$('.mdl button'):$('#kin');if(b)b.focus()}}
+document.addEventListener('keydown',e=>{if(e.key=='Escape'){if(S.pick){S.pick=null;draw()}else if(!$('#k').hidden)kexit()}else if(S.pick&&/^[1-9]$/.test(e.key)){const id=S.pick.ids[+e.key-1];if(id)fin(id,S.pick.st)}});document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&!$('#k').hidden)kexit()});
+draw();
+</script></body></html>

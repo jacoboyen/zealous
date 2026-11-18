@@ -31,7 +31,8 @@ table{width:100%;border-collapse:collapse}th{text-align:left;font-weight:600;col
 td input{min-height:28px;padding:3px 8px}
 .bib{display:inline-block;min-width:46px;text-align:center;font:800 15px "Barlow","Arial Narrow",sans-serif;border:2px solid var(--navy);border-radius:3px;padding:0 8px;background:#fff;color:var(--navy)}
 .grid{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:14px;align-items:start}
-.msg{padding:8px 12px;border-radius:6px;margin-bottom:14px;border:1px solid}.msg.er{background:var(--erb);color:var(--er);border-color:var(--er)}.msg.ok{background:var(--okb);color:var(--ok);border-color:var(--ok)}
+.msg{padding:8px 12px;border-radius:6px;margin-bottom:14px;border:1px solid}.msg.er{background:var(--erb);color:var(--er);border-color:var(--er)}.msg.wa{background:var(--wab);color:var(--wa);border-color:var(--wa)}.sv{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:6px 12px;margin-bottom:14px}.sv button{min-height:28px;padding:2px 10px;margin-left:10px}.sv .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
+.msg.ok{background:var(--okb);color:var(--ok);border-color:var(--ok)}
 .pill{display:flex;justify-content:space-between;background:var(--wab);color:var(--wa);border-radius:6px;padding:5px 9px;margin-top:6px}
 .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:1px 8px;border-radius:10px;background:#eef0f5;color:var(--navy)}.tag.d{background:var(--ac);color:#fff}
 .mu{color:var(--mu)}.gh td{background:#f1f3f8;font-weight:700;font-size:12px;color:var(--navy)}
@@ -52,7 +53,7 @@ footer{background:var(--navy);color:#fff;border-top:5px solid var(--ac);text-ali
 .tm{font-size:13px;min-height:28px;padding:2px 6px;font-weight:400}
 </style></head><body>
 <header class="noprint"><div class="w"><div class="top"><div><div class="logo"><b>ZEALOUS</b>RACING</div><div class="bar"></div></div><div class="co">ZEALOUS × IOWA BIKE CO</div></div><nav id="nav"></nav></div></header>
-<main><div id="fb" class="noprint"></div><div id="m"></div><div id="v"></div></main>
+<main><div id="sv" class="noprint" role="status" aria-live="polite"></div><div id="fb" class="noprint"></div><div id="m"></div><div id="v"></div></main>
 <div id="k" class="kio" hidden></div>
-<footer class="noprint">Zealous Racing × Iowa Bike Co, Pella IA · Race manager UI prototype. Data lives in memory only.</footer>
-<script src="app.js"></script></body></html>
+<footer class="noprint">Zealous Racing × Iowa Bike Co, Pella IA · Race manager UI prototype. Race data saves to the JSON race file you choose (Chrome or Edge on a computer).</footer>
+<script src="app.js"></script><script src="persist.js"></script></body></html>
